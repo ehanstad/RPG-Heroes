@@ -1,4 +1,4 @@
-package com.heroes.items;
+package com.heroes.items.types;
 
 public enum WeaponType {
   Axe,
