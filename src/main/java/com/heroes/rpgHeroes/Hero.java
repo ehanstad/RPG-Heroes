@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.heroes.exceptions.InvalidArmorException;
+import com.heroes.exceptions.InvalidWeaponException;
 import com.heroes.items.Armor;
 import com.heroes.items.Item;
-import com.heroes.items.Slot;
 import com.heroes.items.Weapon;
-import com.heroes.items.types.ArmorType;
-import com.heroes.items.types.WeaponType;
+import com.heroes.items.enums.ArmorType;
+import com.heroes.items.enums.Slot;
+import com.heroes.items.enums.WeaponType;
 
 public abstract class Hero {
   private String name;
@@ -29,11 +31,27 @@ public abstract class Hero {
     equipment.put(Slot.Weapon, null);
   }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public int getLevel() {
+    return this.level;
+  }
+
+  public Map<Slot, Item> getEquipment() {
+    return this.equipment;
+  }
+
   public void levelUp() {
     this.level++;
   }
 
   abstract public int damage();
+
+  abstract public void equip(Weapon weapon);
+
+  abstract public void equip(Armor armor);
 
   abstract public void display();
 
@@ -55,32 +73,20 @@ public abstract class Hero {
     return level + armorAttributes;
   }
 
-  public void equip(Weapon weapon) {
-    if (weapon.getRequiredLevel() <= this.level) {
-      if (validWeaponTypes.contains(weapon.getType())) {
-        equipment.put(Slot.Weapon, weapon);
-      } else {
-        // throw new InvalidWeaponTypeError("The weapon type is not valid for this
-        // class");
-        System.out.println("The weapon type is not valid for this class");
-      }
-    } else {
-      System.out.println("The hero does not have high enough level to equip this weapon");
-    }
+  public void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes) throws InvalidWeaponException {
+    if (!validWeaponTypes.contains(weapon.getType()))
+      throw new InvalidWeaponException("The weapon type is not valid for this class");
+    if (weapon.getRequiredLevel() <= this.level)
+      throw new InvalidWeaponException("The hero does not have high enough level to equip this weapon");
+    equipment.put(Slot.Weapon, weapon);
   }
 
-  public void equip(Armor armor) {
-    if (armor.getRequiredLevel() <= this.level) {
-      if (validArmorTypes.contains(armor.getType())) {
-        equipment.put(armor.getSlot(), armor);
-      } else {
-        // throw new InvalidWeaponTypeError("The weapon type is not valid for this
-        // class");
-        System.out.println("The weapon type is not valid for this class");
-      }
-    } else {
-      System.out.println("The hero does not have high enough level to equip this weapon");
-    }
+  public void equipArmor(Armor armor, List<ArmorType> validArmorTypes) throws InvalidArmorException {
+    if (!validArmorTypes.contains(armor.getType()))
+      throw new InvalidArmorException("The armor type is not valid for this class");
+    if (armor.getRequiredLevel() <= this.level)
+      throw new InvalidArmorException("The hero does not have high enough level to equip this armor");
+    equipment.put(armor.getSlot(), armor);
   }
 
   public void displayHero(String heroClass, HeroAttribute levelAttributes, int damage) {

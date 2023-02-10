@@ -1,4 +1,4 @@
-package com.heroes.items.types;
+package com.heroes.items.enums;
 
 public enum ArmorType {
   Cloth,

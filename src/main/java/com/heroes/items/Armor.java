@@ -1,6 +1,7 @@
 package com.heroes.items;
 
-import com.heroes.items.types.ArmorType;
+import com.heroes.items.enums.ArmorType;
+import com.heroes.items.enums.Slot;
 import com.heroes.rpgHeroes.HeroAttribute;
 
 public class Armor extends Item {

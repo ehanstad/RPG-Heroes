@@ -1,6 +1,7 @@
 package com.heroes.items;
 
-import com.heroes.items.types.WeaponType;
+import com.heroes.items.enums.Slot;
+import com.heroes.items.enums.WeaponType;
 
 public class Weapon extends Item {
   private WeaponType type;
