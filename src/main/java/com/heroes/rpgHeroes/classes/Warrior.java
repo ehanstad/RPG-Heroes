@@ -1,24 +1,19 @@
 package com.heroes.rpgHeroes.classes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.heroes.exceptions.InvalidArmorException;
+import com.heroes.exceptions.InvalidWeaponException;
 import com.heroes.items.Armor;
-import com.heroes.items.Item;
 import com.heroes.items.Weapon;
 import com.heroes.items.enums.ArmorType;
-import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
 import com.heroes.rpgHeroes.Hero;
 import com.heroes.rpgHeroes.HeroAttribute;
 
 public class Warrior extends Hero {
-  private String name;
-  private int level;
   private HeroAttribute levelAttributes;
-  private Map<Slot, Item> equipment = new HashMap<>();
   private List<WeaponType> validWeaponTypes = new ArrayList<>();
   private List<ArmorType> validArmorTypes = new ArrayList<>();
 
@@ -34,6 +29,10 @@ public class Warrior extends Hero {
     validArmorTypes.add(ArmorType.Plate);
   }
 
+  public HeroAttribute getLevelAttributes() {
+    return this.levelAttributes;
+  }
+
   @Override
   public void levelUp() {
     super.levelUp();
@@ -41,30 +40,31 @@ public class Warrior extends Hero {
   }
 
   @Override
-  public int damage() {
-    int dexterity = this.levelAttributes.getDexterity();
-    Weapon weapon = (Weapon) super.getEquipment().get(Slot.Weapon);
-    int weaponDamage = 1;
-    if (weapon != null)
-      weaponDamage = weapon.getDamage();
-    return weaponDamage * (1 + (dexterity / 100));
+  public int totalAttributes() {
+    return super.totalHeroAttributes(this.levelAttributes.getTotal());
   }
 
   @Override
-  public void equip(Weapon weapon) {
+  public int damage() {
+    int damagingAttribute = this.levelAttributes.getDexterity() + super.getArmorAttributes("strength");
+    return super.getWeaponDamage() * (1 + (damagingAttribute / 100));
+  }
+
+  @Override
+  public void equip(Weapon weapon) throws InvalidWeaponException {
     try {
       super.equipWeapon(weapon, this.validWeaponTypes);
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new InvalidWeaponException(e.getMessage());
     }
   }
 
   @Override
-  public void equip(Armor armor) {
+  public void equip(Armor armor) throws InvalidArmorException {
     try {
       super.equipArmor(armor, validArmorTypes);
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new InvalidArmorException(e.getMessage());
     }
   }
 

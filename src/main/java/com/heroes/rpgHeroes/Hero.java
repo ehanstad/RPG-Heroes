@@ -1,9 +1,9 @@
 package com.heroes.rpgHeroes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.heroes.exceptions.InvalidArmorException;
 import com.heroes.exceptions.InvalidWeaponException;
@@ -19,8 +19,8 @@ public abstract class Hero {
   private int level;
   private HeroAttribute levelAttributes;
   private Map<Slot, Item> equipment = new HashMap<>();
-  private List<WeaponType> validWeaponTypes = new ArrayList<>();
-  private List<ArmorType> validArmorTypes = new ArrayList<>();
+  private List<WeaponType> validWeaponTypes;
+  private List<ArmorType> validArmorTypes;
 
   public Hero(String name) {
     this.name = name;
@@ -49,21 +49,22 @@ public abstract class Hero {
 
   abstract public int damage();
 
-  abstract public void equip(Weapon weapon);
+  abstract public int totalAttributes();
 
-  abstract public void equip(Armor armor);
+  abstract public void equip(Weapon weapon) throws InvalidWeaponException;
+
+  abstract public void equip(Armor armor) throws InvalidArmorException;
 
   abstract public void display();
 
-  public int totalAttributes() {
-    int level = this.levelAttributes.getTotal();
+  protected int totalHeroAttributes(int level) {
     int armorAttributes = 0;
 
     for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
       Slot s = set.getKey();
       Item i = set.getValue();
 
-      if (!i.equals(null) || !s.equals(Slot.Weapon)) {
+      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
         Armor a = (Armor) i;
         HeroAttribute ha = (HeroAttribute) a.getHeroAttribute();
         armorAttributes += ha.getTotal();
@@ -76,7 +77,7 @@ public abstract class Hero {
   public void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes) throws InvalidWeaponException {
     if (!validWeaponTypes.contains(weapon.getType()))
       throw new InvalidWeaponException("The weapon type is not valid for this class");
-    if (weapon.getRequiredLevel() <= this.level)
+    if (weapon.getRequiredLevel() > this.level)
       throw new InvalidWeaponException("The hero does not have high enough level to equip this weapon");
     equipment.put(Slot.Weapon, weapon);
   }
@@ -84,7 +85,7 @@ public abstract class Hero {
   public void equipArmor(Armor armor, List<ArmorType> validArmorTypes) throws InvalidArmorException {
     if (!validArmorTypes.contains(armor.getType()))
       throw new InvalidArmorException("The armor type is not valid for this class");
-    if (armor.getRequiredLevel() <= this.level)
+    if (armor.getRequiredLevel() > this.level)
       throw new InvalidArmorException("The hero does not have high enough level to equip this armor");
     equipment.put(armor.getSlot(), armor);
   }
@@ -101,5 +102,39 @@ public abstract class Hero {
     sb.append("DAMAGE: " + damage + "\n");
     sb.append("---------------------------\n");
     System.out.println(sb.toString());
+  }
+
+  protected int getArmorAttributes(String attribute) {
+    int armorAttributes = 0;
+    for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
+      Slot s = set.getKey();
+      Item i = set.getValue();
+
+      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
+        Armor a = (Armor) i;
+        HeroAttribute heroAttribute = (HeroAttribute) a.getHeroAttribute();
+        switch (attribute) {
+          case "strength":
+            armorAttributes += heroAttribute.getStrength();
+            break;
+          case "dexterity":
+            armorAttributes += heroAttribute.getDexterity();
+            break;
+          case "intelligence":
+            armorAttributes += heroAttribute.getIntelligence();
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return armorAttributes;
+  }
+
+  protected int getWeaponDamage() {
+    Weapon weapon = (Weapon) equipment.get(Slot.Weapon);
+    if (weapon != null)
+      return weapon.getDamage();
+    return 1;
   }
 }

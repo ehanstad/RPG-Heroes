@@ -2,9 +2,7 @@ package com.heroes;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import com.heroes.items.Armor;
 import com.heroes.items.enums.ArmorType;
@@ -17,26 +15,51 @@ public class ArmorTest {
 
   @Test
   public void armorCreationShouldInitCorrectName() {
-    assertEquals(helmet.getName(), "testHelmet");
+    // Arrange
+    String expected = "testHelmet";
+    // Act
+    String actual = helmet.getName();
+    // Assert
+    assertEquals(expected, actual);
   }
 
   @Test
   public void armorCreationShouldInitCorrectRequiredLevel() {
-    assertEquals(helmet.getRequiredLevel(), 4);
+    // Arrange
+    int expected = 4;
+    // Act
+    int actual = helmet.getRequiredLevel();
+    // Assert
+    assertEquals(expected, actual);
   }
 
   @Test
   public void armorCreationShouldInitCorrectSlot() {
-    assertEquals(helmet.getSlot(), Slot.Head);
+    // Arrange
+    Slot expected = Slot.Head;
+    // Act
+    Slot actual = helmet.getSlot();
+    // Assert
+    assertEquals(expected, actual);
   }
 
   @Test
   public void armorCreationShouldInitCorrectType() {
-    assertEquals(helmet.getType(), ArmorType.Cloth);
+    // Arrange
+    ArmorType expected = ArmorType.Cloth;
+    // Act
+    ArmorType actual = (ArmorType) helmet.getType();
+    // Assert
+    assertEquals(expected, actual);
   }
 
   @Test
   public void armorCreationShouldInitCorrectAttributes() {
-    assertEquals(helmet.getHeroAttribute(), armorAttribute);
+    // Arrange
+    HeroAttribute expected = armorAttribute;
+    // Act
+    HeroAttribute actual = (HeroAttribute) helmet.getHeroAttribute();
+    // Assert
+    assertEquals(expected, actual);
   }
 }
