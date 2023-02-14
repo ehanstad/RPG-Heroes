@@ -1,4 +1,4 @@
-package com.heroes;
+package com.heroes.items;
 
 import static org.junit.Assert.assertEquals;
 

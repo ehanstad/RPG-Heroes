@@ -1,4 +1,4 @@
-package com.heroes;
+package com.heroes.rpgHeroes;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,11 +15,11 @@ import com.heroes.items.enums.ArmorType;
 import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
 import com.heroes.rpgHeroes.HeroAttribute;
-import com.heroes.rpgHeroes.classes.Rogue;
+import com.heroes.rpgHeroes.classes.Mage;
 
-public class RogueTest {
+public class MageTest {
 
-  Rogue test;
+  Mage test;
 
   Weapon validWeapon;
   Weapon inValidWeaponType;
@@ -37,28 +37,28 @@ public class RogueTest {
 
   @Before
   public void setup() {
-    test = new Rogue("test");
+    test = new Mage("test");
 
-    validWeapon = new Weapon("testWand", 1, WeaponType.Dagger, 3);
+    validWeapon = new Weapon("testWand", 1, WeaponType.Wand, 3);
     inValidWeaponType = new Weapon("testBow", 1, WeaponType.Bow, 2);
-    inValidWeaponLevel = new Weapon("testWand", 2, WeaponType.Dagger, 3);
-    newValidWeapon = new Weapon("newWand", 1, WeaponType.Dagger, 4);
+    inValidWeaponLevel = new Weapon("testWand", 2, WeaponType.Wand, 3);
+    newValidWeapon = new Weapon("newWand", 1, WeaponType.Wand, 4);
 
-    validArmor = new Armor("leather", 1, ArmorType.Leather, new HeroAttribute(2, 0, 0), Slot.Body);
-    inValidArmorLevel = new Armor("leather", 2, ArmorType.Leather, new HeroAttribute(2, 0, 0), Slot.Body);
-    invalidArmorType = new Armor("cloth", 1, ArmorType.Cloth, new HeroAttribute(2, 0, 0), Slot.Body);
+    validArmor = new Armor("leather", 1, ArmorType.Cloth, new HeroAttribute(2, 0, 0), Slot.Body);
+    inValidArmorLevel = new Armor("leather", 2, ArmorType.Cloth, new HeroAttribute(2, 0, 0), Slot.Body);
+    invalidArmorType = new Armor("cloth", 1, ArmorType.Leather, new HeroAttribute(2, 0, 0), Slot.Body);
 
-    firstArmor = new Armor("head", 1, ArmorType.Leather, new HeroAttribute(1, 1, 1), Slot.Head);
-    secondArmor = new Armor("body", 1, ArmorType.Leather, new HeroAttribute(1, 1, 1), Slot.Body);
-    thirdArmor = new Armor("legs", 1, ArmorType.Leather, new HeroAttribute(1, 1, 1), Slot.Legs);
-    sameSlotAsFirstArmor = new Armor("head", 1, ArmorType.Leather, new HeroAttribute(2, 2, 2), Slot.Head);
+    firstArmor = new Armor("head", 1, ArmorType.Cloth, new HeroAttribute(1, 1, 1), Slot.Head);
+    secondArmor = new Armor("body", 1, ArmorType.Cloth, new HeroAttribute(1, 1, 1), Slot.Body);
+    thirdArmor = new Armor("legs", 1, ArmorType.Cloth, new HeroAttribute(1, 1, 1), Slot.Legs);
+    sameSlotAsFirstArmor = new Armor("head", 1, ArmorType.Cloth, new HeroAttribute(2, 2, 2), Slot.Head);
 
-    bigDamageImpactArmor = new Armor("bigDamageImpactArmor", 1, ArmorType.Leather, new HeroAttribute(0, 100, 0),
+    bigDamageImpactArmor = new Armor("bigDamageImpactArmor", 1, ArmorType.Cloth, new HeroAttribute(0, 0, 100),
         Slot.Body);
   }
 
   @Test
-  public void rogueGetName() {
+  public void mageGetName() {
     // Arrange
     String expected = "test";
     // Act
@@ -68,7 +68,7 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueGetLevel_shouldInitAs1() {
+  public void mageGetLevel_shouldInitAs1() {
     // Arrange
     int expected = 1;
     // Act
@@ -78,9 +78,9 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueStrength_ShouldBeInitAs2() {
+  public void mageStrength_ShouldBeInitAs1() {
     // Arrange
-    int expected = 2;
+    int expected = 1;
     // Act
     int actual = test.getLevelAttributes().getStrength();
     // Assert
@@ -88,9 +88,9 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueDexterity_ShouldBeInitAs6() {
+  public void mageDexterity_ShouldBeInitAs1() {
     // Arrange
-    int expected = 6;
+    int expected = 1;
     // Act
     int actual = test.getLevelAttributes().getDexterity();
     // Assert
@@ -98,9 +98,9 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueIntelligence_ShouldBeInitAs1() {
+  public void mageIntelligence_ShouldBeInitAs8() {
     // Arrange
-    int expected = 1;
+    int expected = 8;
     // Act
     int actual = test.getLevelAttributes().getIntelligence();
     // Assert
@@ -108,7 +108,7 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueLevel_LevelUp_ShouldBe2() {
+  public void mageLevel_LevelUp_ShouldBe2() {
     // Arrange
     test.levelUp();
     int expected = 2;
@@ -119,10 +119,10 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueStrength_LevelUp_ShouldBe3() {
+  public void mageStrength_LevelUp_ShouldBe2() {
     // Arrange
     test.levelUp();
-    int expected = 3;
+    int expected = 2;
     // Act
     int actual = test.getLevelAttributes().getStrength();
     // Assert
@@ -130,10 +130,10 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueDexterity_LevelUp_ShouldBe10() {
+  public void mageDexterity_LevelUp_ShouldBe2() {
     // Arrange
     test.levelUp();
-    int expected = 10;
+    int expected = 2;
     // Act
     int actual = test.getLevelAttributes().getDexterity();
     // Assert
@@ -141,10 +141,10 @@ public class RogueTest {
   }
 
   @Test
-  public void rogueIntelligence_LevelUp_ShouldBe2() {
+  public void mageIntelligence_LevelUp_ShouldBe13() {
     // Arrange
     test.levelUp();
-    int expected = 2;
+    int expected = 13;
     // Act
     int actual = test.getLevelAttributes().getIntelligence();
     // Assert
@@ -217,7 +217,7 @@ public class RogueTest {
     try {
       // Arrange
       test.equip(firstArmor);
-      int expected = 12;
+      int expected = 13;
       // Act
       int actual = test.totalAttributes();
       // Assert
@@ -233,7 +233,7 @@ public class RogueTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(secondArmor);
-      int expected = 15;
+      int expected = 16;
       // Act
       int actual = test.totalAttributes();
       // Assert
@@ -250,7 +250,7 @@ public class RogueTest {
       test.equip(firstArmor);
       test.equip(secondArmor);
       test.equip(thirdArmor);
-      int expected = 18;
+      int expected = 19;
       // Act
       int actual = test.totalAttributes();
       // Assert
@@ -266,7 +266,7 @@ public class RogueTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(sameSlotAsFirstArmor);
-      int expected = 15;
+      int expected = 16;
       // Act
       int actual = test.totalAttributes();
       // Assert
