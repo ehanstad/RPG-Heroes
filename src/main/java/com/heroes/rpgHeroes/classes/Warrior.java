@@ -44,19 +44,19 @@ public class Warrior extends Hero {
 
   @Override
   public int totalAttributes() {
-    return super.totalHeroAttributes(this.levelAttributes.getTotal());
+    return Util.totalHeroAttributes(this.levelAttributes.getTotal(), super.equipment);
   }
 
   @Override
   public int damage() {
-    int damagingAttribute = this.levelAttributes.getDexterity() + super.getArmorAttributes("strength");
-    return super.getWeaponDamage() * (1 + (damagingAttribute / 100));
+    int damagingAttribute = this.levelAttributes.getDexterity() + Util.getArmorAttributes("strength", equipment);
+    return Util.getWeaponDamage(super.equipment) * (1 + (damagingAttribute / 100));
   }
 
   @Override
   public void equip(Weapon weapon) throws InvalidWeaponException {
     try {
-      super.equipWeapon(weapon, this.validWeaponTypes);
+      Util.equipWeapon(weapon, this.validWeaponTypes, super.level, super.equipment);
     } catch (Exception e) {
       throw new InvalidWeaponException(e.getMessage());
     }
@@ -65,7 +65,7 @@ public class Warrior extends Hero {
   @Override
   public void equip(Armor armor) throws InvalidArmorException {
     try {
-      super.equipArmor(armor, validArmorTypes);
+      Util.equipArmor(armor, validArmorTypes, super.level, super.equipment);
     } catch (Exception e) {
       throw new InvalidArmorException(e.getMessage());
     }
@@ -73,6 +73,6 @@ public class Warrior extends Hero {
 
   @Override
   public void display() {
-    displayHero("Warrior", this.levelAttributes, this.damage());
+    Util.displayHero(super.name, "WARRIOR", super.level, this.levelAttributes, damage());
   }
 }

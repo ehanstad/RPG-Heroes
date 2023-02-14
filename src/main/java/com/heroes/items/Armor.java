@@ -25,4 +25,18 @@ public class Armor extends Item {
   public Object getHeroAttribute() {
     return this.armorAttribute;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Armor that = (Armor) o;
+    return type == that.type &&
+        armorAttribute == that.armorAttribute &&
+        super.name == that.name &&
+        super.requiredLevel == that.requiredLevel &&
+        super.slot == that.slot;
+  }
 }

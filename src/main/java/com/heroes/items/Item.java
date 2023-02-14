@@ -8,9 +8,9 @@ import com.heroes.items.enums.Slot;
  * Item is equipped
  */
 public abstract class Item {
-  private String name;
-  private int requiredLevel;
-  private Slot slot;
+  protected String name;
+  protected int requiredLevel;
+  protected Slot slot;
 
   public Item(String name, int requiredLevel, Slot slot) {
     this.name = name;

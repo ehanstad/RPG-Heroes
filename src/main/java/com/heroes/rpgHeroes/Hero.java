@@ -3,7 +3,6 @@ package com.heroes.rpgHeroes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.heroes.exceptions.InvalidArmorException;
 import com.heroes.exceptions.InvalidWeaponException;
@@ -18,12 +17,12 @@ import com.heroes.items.enums.WeaponType;
  * This is a abstract class representing a Hero.
  */
 public abstract class Hero {
-  private String name;
-  private int level;
-  private HeroAttribute levelAttributes;
-  private Map<Slot, Item> equipment = new HashMap<>();
-  private List<WeaponType> validWeaponTypes;
-  private List<ArmorType> validArmorTypes;
+  protected String name;
+  protected int level;
+  protected HeroAttribute levelAttributes;
+  protected Map<Slot, Item> equipment = new HashMap<>();
+  protected List<WeaponType> validWeaponTypes;
+  protected List<ArmorType> validArmorTypes;
 
   public Hero(String name) {
     this.name = name;
@@ -88,84 +87,4 @@ public abstract class Hero {
    */
   abstract public void display();
 
-  protected int totalHeroAttributes(int level) {
-    int armorAttributes = 0;
-
-    for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
-      Slot s = set.getKey();
-      Item i = set.getValue();
-
-      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
-        Armor a = (Armor) i;
-        HeroAttribute ha = (HeroAttribute) a.getHeroAttribute();
-        armorAttributes += ha.getTotal();
-      }
-    }
-
-    return level + armorAttributes;
-  }
-
-  protected void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes) throws InvalidWeaponException {
-    if (!validWeaponTypes.contains(weapon.getType()))
-      throw new InvalidWeaponException("The weapon type is not valid for this class");
-    if (weapon.getRequiredLevel() > this.level)
-      throw new InvalidWeaponException("The hero does not have high enough level to equip this weapon");
-    equipment.put(Slot.Weapon, weapon);
-  }
-
-  protected void equipArmor(Armor armor, List<ArmorType> validArmorTypes) throws InvalidArmorException {
-    if (!validArmorTypes.contains(armor.getType()))
-      throw new InvalidArmorException("The armor type is not valid for this class");
-    if (armor.getRequiredLevel() > this.level)
-      throw new InvalidArmorException("The hero does not have high enough level to equip this armor");
-    equipment.put(armor.getSlot(), armor);
-  }
-
-  protected void displayHero(String heroClass, HeroAttribute levelAttributes, int damage) {
-    StringBuilder sb = new StringBuilder();
-    sb.append("\n---------------------------\n");
-    sb.append("NAME: " + this.name + "\n");
-    sb.append("CLASS: " + heroClass + "\n");
-    sb.append("LEVEL: " + this.level + "\n");
-    sb.append("STRENGTH: " + levelAttributes.getStrength() + " ");
-    sb.append("DEXTERITY: " + levelAttributes.getDexterity() + " ");
-    sb.append("INTELLIGENCE: " + levelAttributes.getIntelligence() + "\n");
-    sb.append("DAMAGE: " + damage + "\n");
-    sb.append("---------------------------\n");
-    System.out.println(sb.toString());
-  }
-
-  protected int getArmorAttributes(String attribute) {
-    int armorAttributes = 0;
-    for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
-      Slot s = set.getKey();
-      Item i = set.getValue();
-
-      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
-        Armor a = (Armor) i;
-        HeroAttribute heroAttribute = (HeroAttribute) a.getHeroAttribute();
-        switch (attribute) {
-          case "strength":
-            armorAttributes += heroAttribute.getStrength();
-            break;
-          case "dexterity":
-            armorAttributes += heroAttribute.getDexterity();
-            break;
-          case "intelligence":
-            armorAttributes += heroAttribute.getIntelligence();
-            break;
-          default:
-            break;
-        }
-      }
-    }
-    return armorAttributes;
-  }
-
-  protected int getWeaponDamage() {
-    Weapon weapon = (Weapon) equipment.get(Slot.Weapon);
-    if (weapon != null)
-      return weapon.getDamage();
-    return 1;
-  }
 }

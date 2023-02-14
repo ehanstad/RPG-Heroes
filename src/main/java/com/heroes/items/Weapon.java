@@ -24,4 +24,18 @@ public class Weapon extends Item {
   public WeaponType getType() {
     return this.type;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Weapon that = (Weapon) o;
+    return type == that.type &&
+        damage == that.damage &&
+        super.name == that.name &&
+        super.requiredLevel == that.requiredLevel &&
+        super.slot == that.slot;
+  }
 }
