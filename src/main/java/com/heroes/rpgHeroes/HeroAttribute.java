@@ -1,5 +1,9 @@
 package com.heroes.rpgHeroes;
 
+/**
+ * This class is an instance of a heros attribute, it includes the heros
+ * strength, dexterity and intelligence.
+ */
 public class HeroAttribute {
   private int strength;
   private int dexterity;
@@ -11,6 +15,14 @@ public class HeroAttribute {
     this.intelligence = intelligence;
   }
 
+  /**
+   * Increases the heros attributes by adding the incoming attributes
+   * with existing attributes
+   * 
+   * @param strength     the strength which will be added
+   * @param dexterity    the dexterity which will be added
+   * @param intelligence the intelligence which will be added
+   */
   public void increaseAttribute(int strength, int dexterity, int intelligence) {
     this.strength += strength;
     this.dexterity += dexterity;

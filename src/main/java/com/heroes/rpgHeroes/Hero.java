@@ -14,6 +14,9 @@ import com.heroes.items.enums.ArmorType;
 import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
 
+/**
+ * This is a abstract class representing a Hero.
+ */
 public abstract class Hero {
   private String name;
   private int level;
@@ -47,14 +50,42 @@ public abstract class Hero {
     this.level++;
   }
 
+  /**
+   * Calculates the heros damage, depends on Weapon, Attributes and
+   * Armor
+   * 
+   * @return the heros damage as a int
+   */
   abstract public int damage();
 
+  /**
+   * Calculates the heros total attributes
+   * 
+   * @return the heros total attributes
+   */
   abstract public int totalAttributes();
 
+  /**
+   * Adds a weapon to the equipment of the hero
+   * 
+   * @param weapon the weapon which is being equipped
+   * @throws InvalidWeaponException if the required level is to high or weapon is
+   *                                not valid list a exception is thrown
+   */
   abstract public void equip(Weapon weapon) throws InvalidWeaponException;
 
+  /**
+   * Adds a armor to the equipment of the hero
+   * 
+   * @param armor the armor which is being equipped
+   * @throws InvalidArmorException if the required level is to high or weapon is
+   *                               not valid list a exception is thrown
+   */
   abstract public void equip(Armor armor) throws InvalidArmorException;
 
+  /**
+   * Display's the heros name, level, class, attributes and damage to the console
+   */
   abstract public void display();
 
   protected int totalHeroAttributes(int level) {
@@ -74,7 +105,7 @@ public abstract class Hero {
     return level + armorAttributes;
   }
 
-  public void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes) throws InvalidWeaponException {
+  protected void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes) throws InvalidWeaponException {
     if (!validWeaponTypes.contains(weapon.getType()))
       throw new InvalidWeaponException("The weapon type is not valid for this class");
     if (weapon.getRequiredLevel() > this.level)
@@ -82,7 +113,7 @@ public abstract class Hero {
     equipment.put(Slot.Weapon, weapon);
   }
 
-  public void equipArmor(Armor armor, List<ArmorType> validArmorTypes) throws InvalidArmorException {
+  protected void equipArmor(Armor armor, List<ArmorType> validArmorTypes) throws InvalidArmorException {
     if (!validArmorTypes.contains(armor.getType()))
       throw new InvalidArmorException("The armor type is not valid for this class");
     if (armor.getRequiredLevel() > this.level)
@@ -90,7 +121,7 @@ public abstract class Hero {
     equipment.put(armor.getSlot(), armor);
   }
 
-  public void displayHero(String heroClass, HeroAttribute levelAttributes, int damage) {
+  protected void displayHero(String heroClass, HeroAttribute levelAttributes, int damage) {
     StringBuilder sb = new StringBuilder();
     sb.append("\n---------------------------\n");
     sb.append("NAME: " + this.name + "\n");

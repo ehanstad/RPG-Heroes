@@ -12,6 +12,9 @@ import com.heroes.items.enums.WeaponType;
 import com.heroes.rpgHeroes.Hero;
 import com.heroes.rpgHeroes.HeroAttribute;
 
+/**
+ * This class is an instance of Mage, a subclass to Hero.
+ */
 public class Mage extends Hero {
   private HeroAttribute levelAttributes;
   private List<WeaponType> validWeaponTypes = new ArrayList<>();

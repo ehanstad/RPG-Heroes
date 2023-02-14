@@ -2,6 +2,11 @@ package com.heroes.items;
 
 import com.heroes.items.enums.Slot;
 
+/**
+ * An Item has a name, a required level which indicates what level the
+ * hero needs to equip the Item and a Slot which indicates what Slot the
+ * Item is equipped
+ */
 public abstract class Item {
   private String name;
   private int requiredLevel;

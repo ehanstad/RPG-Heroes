@@ -3,6 +3,10 @@ package com.heroes.items;
 import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
 
+/**
+ * Weapon is a type of Item with an weapon type and damage.
+ * Weapon can be placed in Slot weapon
+ */
 public class Weapon extends Item {
   private WeaponType type;
   private int damage;
