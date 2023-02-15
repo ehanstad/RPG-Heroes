@@ -16,13 +16,14 @@ import com.heroes.rpgHeroes.HeroAttribute;
  */
 public class FirstSection {
 
-  public static void startAdventure(Hero hero, Scanner in) {
+  protected static void startAdventure(Hero hero, Scanner in) {
     GameUtils.clearScreen();
-    System.out.println("\n------------------------------------------------------\n");
+    GameUtils.createLine();
     System.out
-        .println("Your adventure starts far out in the deep forest of Tailwoods your hero " + hero.getName()
+        .println(ConsoleColors.TEXT_BRIGHT_BLUE
+            + "Your adventure starts far out in the deep forest of Tailwoods your hero " + hero.getName()
             + " is alone and cold and as no idea what lurks in this uninviting environment.");
-    System.out.println("\n------------------------------------------------------\n");
+    GameUtils.createLine();
     System.out.println("You have some different choses to do:");
     System.out.println(
         "w = travel north\ta = travel west\td = travel east\ts = travel south\nl = view your hero");
@@ -54,12 +55,12 @@ public class FirstSection {
     GameUtils.clearScreen();
     int villainHp = 3;
     Weapon smallKnife = new Weapon("smallKnife", 1, WeaponType.Dagger, 1);
-    System.out.println("\n------------------------------------------------------\n");
-    System.out.println(
+    GameUtils.createLine();
+    System.out.println(ConsoleColors.TEXT_BRIGHT_BLUE +
         "As your hero travel south a strange sight catches your hero's eye. A what seems to be a human sized duck approaches him. It's intentions seems friendly...");
     System.out.println(
         "At FIRST. For as your hero gets closer it becomes clear that this duck has some real nasty intensions. He holds a small knife and his eyebrows are in V-shape");
-    System.out.println("\n------------------------------------------------------\n");
+    GameUtils.createLine();
 
     while (true) {
       System.out.println("attack = a\trun away = r\tduck's hp: " + villainHp);
@@ -77,8 +78,9 @@ public class FirstSection {
             } catch (InvalidWeaponException e) {
               System.out.println(e.getMessage());
             } finally {
-              System.out.println("-- TODO MOVE ON TO NEXT SECTION --");
+              System.out.println("Press to move on");
               if (in.nextLine() != null) {
+                SecondSection.startSecondSection(hero, in);
               }
             }
           } else {
@@ -86,7 +88,7 @@ public class FirstSection {
           }
           break;
         case "r":
-          System.out.println("-- TODO MOVE ON TO NEXT SECTION --");
+          SecondSection.startSecondSection(hero, in);
           break;
         default:
           System.out.println("invalid input");
@@ -115,16 +117,17 @@ public class FirstSection {
     Armor neatBoots = new Armor("neat boots", 1, ArmorType.Leather, new HeroAttribute(1, 1, 1), Slot.Legs);
     while (true) {
       GameUtils.clearScreen();
-      System.out.println("\n------------------------------------------------------\n");
-      System.out.println("As your hero travel north you find some neat looking boots");
-      System.out.println("\n------------------------------------------------------\n");
+      GameUtils.createLine();
+      System.out.println(ConsoleColors.TEXT_BRIGHT_BLUE + "As your hero travel north you find some neat looking boots");
+      GameUtils.createLine();
       try {
         hero.equip(neatBoots);
       } catch (Exception e) {
         System.out.println(e.getMessage());
       } finally {
-        System.out.println("-- TODO MOVE ON TO NEXT SECTION --");
+        System.out.println("Press to move on");
         if (in.nextLine() != null) {
+          SecondSection.startSecondSection(hero, in);
         }
       }
     }

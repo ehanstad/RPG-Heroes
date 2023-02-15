@@ -14,7 +14,6 @@ import com.heroes.items.Weapon;
 import com.heroes.items.enums.ArmorType;
 import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
-import com.heroes.rpgHeroes.HeroAttribute;
 import com.heroes.rpgHeroes.classes.Rogue;
 
 public class RogueTest {

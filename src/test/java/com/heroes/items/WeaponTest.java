@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.heroes.items.Weapon;
 import com.heroes.items.enums.Slot;
 import com.heroes.items.enums.WeaponType;
 
