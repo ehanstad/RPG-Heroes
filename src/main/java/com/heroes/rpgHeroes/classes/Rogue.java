@@ -72,6 +72,6 @@ public class Rogue extends Hero {
 
   @Override
   public void display() {
-    Util.displayHero(super.name, "Rogue", super.level, this.levelAttributes, damage());
+    Util.displayHero(super.name, "ROGUE", super.level, this.levelAttributes, damage());
   }
 }

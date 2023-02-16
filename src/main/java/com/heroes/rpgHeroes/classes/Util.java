@@ -2,7 +2,6 @@ package com.heroes.rpgHeroes.classes;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.heroes.exceptions.InvalidArmorException;
 import com.heroes.exceptions.InvalidWeaponException;
@@ -16,19 +15,15 @@ import com.heroes.rpgHeroes.HeroAttribute;
 
 /**
  * This class is help class for the hero-subclasses, it contains methods to
- * reduce writing the same
- * code on four different places
+ * reduce redundant code
  */
 public class Util {
   protected static int totalHeroAttributes(int level, Map<Slot, Item> equipment) {
     int armorAttributes = 0;
 
     for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
-      Slot s = set.getKey();
-      Item i = set.getValue();
-
-      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
-        Armor a = (Armor) i;
+      if (set.getValue() != null && set.getValue() instanceof Armor) {
+        Armor a = (Armor) set.getValue();
         HeroAttribute ha = (HeroAttribute) a.getHeroAttribute();
         armorAttributes += ha.getTotal();
       }
@@ -74,11 +69,8 @@ public class Util {
   protected static int getArmorAttributes(String attribute, Map<Slot, Item> equipment) {
     int armorAttributes = 0;
     for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
-      Slot s = set.getKey();
-      Item i = set.getValue();
-
-      if (!Objects.isNull(set.getValue()) && !s.equals(Slot.Weapon)) {
-        Armor a = (Armor) i;
+      if (set.getValue() != null && set.getValue() instanceof Armor) {
+        Armor a = (Armor) set.getValue();
         HeroAttribute heroAttribute = (HeroAttribute) a.getHeroAttribute();
         switch (attribute) {
           case "strength":
