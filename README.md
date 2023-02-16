@@ -13,6 +13,9 @@ The main focus of the project is the model part; found in /items, /rpgHeros. `He
 ### view
 The actual game is created in /game, containing of `Game` which inits the game with input from the user. `FirstSection` and `SecondSection` is classes which takes the game forward. `GameUtils` is a help-class for the earlier mentioned classes. `ConsoleColor` is a class which contains ANSI code for different colors for the console. 
 
+### tests
+Most of the functions in model are tested, those tests can be found in the /test folder where tests are created for each specific classes together with Armor and Weapon classes.
+
 ## Description
 First assignment for the backend part of the course Java Fullstack Remote Nordics Jan 23
 
