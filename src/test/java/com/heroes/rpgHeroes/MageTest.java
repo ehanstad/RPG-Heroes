@@ -332,4 +332,14 @@ public class MageTest {
     }
   }
 
+  @Test
+  public void displayMage() {
+    // Arrange
+    String expected = "\n---------------------------\nNAME: test\nCLASS: MAGE\nLEVEL: 1\nSTRENGTH: 1 DEXTERITY: 1 INTELLIGENCE: 8\nDAMAGE: 1\n---------------------------\n";
+    // Act
+    String actual = test.display();
+    // Assert
+    assertEquals(expected, actual);
+  }
+
 }

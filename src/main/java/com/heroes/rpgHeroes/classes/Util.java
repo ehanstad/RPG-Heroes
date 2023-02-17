@@ -51,7 +51,7 @@ public class Util {
     equipment.put(armor.getSlot(), armor);
   }
 
-  protected static void displayHero(String name, String heroClass, int level, HeroAttribute levelAttributes,
+  protected static String displayHero(String name, String heroClass, int level, HeroAttribute levelAttributes,
       int damage) {
     StringBuilder sb = new StringBuilder();
     sb.append("\n---------------------------\n");
@@ -63,7 +63,7 @@ public class Util {
     sb.append("INTELLIGENCE: " + levelAttributes.getIntelligence() + "\n");
     sb.append("DAMAGE: " + damage + "\n");
     sb.append("---------------------------\n");
-    System.out.println(sb.toString());
+    return sb.toString();
   }
 
   protected static int getArmorAttributes(String attribute, Map<Slot, Item> equipment) {

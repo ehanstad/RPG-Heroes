@@ -332,4 +332,14 @@ public class WarriorTest {
     }
   }
 
+  @Test
+  public void displayWarrior() {
+    // Arrange
+    String expected = "\n---------------------------\nNAME: test\nCLASS: WARRIOR\nLEVEL: 1\nSTRENGTH: 5 DEXTERITY: 2 INTELLIGENCE: 1\nDAMAGE: 1\n---------------------------\n";
+    // Act
+    String actual = test.display();
+    // Assert
+    assertEquals(expected, actual);
+  }
+
 }

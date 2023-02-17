@@ -69,7 +69,7 @@ public class Ranger extends Hero {
   }
 
   @Override
-  public void display() {
-    Util.displayHero(super.name, "RANGER", super.level, this.levelAttributes, damage());
+  public String display() {
+    return Util.displayHero(super.name, "RANGER", super.level, this.levelAttributes, damage());
   }
 }

@@ -332,4 +332,13 @@ public class RogueTest {
     }
   }
 
+  @Test
+  public void displayRogue() {
+    // Arrange
+    String expected = "\n---------------------------\nNAME: test\nCLASS: ROGUE\nLEVEL: 1\nSTRENGTH: 2 DEXTERITY: 6 INTELLIGENCE: 1\nDAMAGE: 1\n---------------------------\n";
+    // Act
+    String actual = test.display();
+    // Assert
+    assertEquals(expected, actual);
+  }
 }

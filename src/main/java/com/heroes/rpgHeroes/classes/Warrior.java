@@ -72,7 +72,7 @@ public class Warrior extends Hero {
   }
 
   @Override
-  public void display() {
-    Util.displayHero(super.name, "WARRIOR", super.level, this.levelAttributes, damage());
+  public String display() {
+    return Util.displayHero(super.name, "WARRIOR", super.level, this.levelAttributes, damage());
   }
 }

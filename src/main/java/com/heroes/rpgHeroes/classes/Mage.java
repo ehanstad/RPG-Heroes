@@ -71,7 +71,7 @@ public class Mage extends Hero {
   }
 
   @Override
-  public void display() {
-    Util.displayHero(super.name, "MAGE", super.level, this.levelAttributes, damage());
+  public String display() {
+    return Util.displayHero(super.name, "MAGE", super.level, this.levelAttributes, damage());
   }
 }

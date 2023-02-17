@@ -42,7 +42,7 @@ public class FirstSection {
           travelSouth(hero, in);
           break;
         case "l":
-          hero.display();
+          System.out.println(hero.display());
           break;
         default:
           System.out.println("invalid input");

@@ -85,6 +85,6 @@ public abstract class Hero {
   /**
    * Display's the heros name, level, class, attributes and damage to the console
    */
-  abstract public void display();
+  abstract public String display();
 
 }
