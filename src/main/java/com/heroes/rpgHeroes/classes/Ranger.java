@@ -40,14 +40,13 @@ public class Ranger extends Hero {
   }
 
   @Override
-  public int totalAttributes() {
-    return Util.totalHeroAttributes(this.levelAttributes.getTotal(), equipment);
+  public HeroAttribute totalAttributes() {
+    return Util.totalHeroAttributes(this.levelAttributes, equipment);
   }
 
   @Override
   public int damage() {
-    int damagingAttribute = this.levelAttributes.getDexterity() + Util.getArmorAttributes("dexterity", super.equipment);
-    return Util.getWeaponDamage(super.equipment) * (1 + (damagingAttribute / 100));
+    return Util.getWeaponDamage(super.equipment) * (1 + (totalAttributes().getDexterity() / 100));
   }
 
   @Override

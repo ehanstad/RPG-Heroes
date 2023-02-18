@@ -18,18 +18,17 @@ import com.heroes.rpgHeroes.HeroAttribute;
  * reduce redundant code
  */
 public class Util {
-  protected static int totalHeroAttributes(int level, Map<Slot, Item> equipment) {
-    int armorAttributes = 0;
-
+  protected static HeroAttribute totalHeroAttributes(HeroAttribute attribute, Map<Slot, Item> equipment) {
+    HeroAttribute totalAttribute = attribute;
     for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
       if (set.getValue() != null && set.getValue() instanceof Armor) {
         Armor a = (Armor) set.getValue();
         HeroAttribute ha = (HeroAttribute) a.getHeroAttribute();
-        armorAttributes += ha.getTotal();
+        totalAttribute.increaseAttribute(ha);
       }
     }
 
-    return level + armorAttributes;
+    return totalAttribute;
   }
 
   protected static void equipWeapon(Weapon weapon, List<WeaponType> validWeaponTypes, int level,
@@ -64,30 +63,6 @@ public class Util {
     sb.append("DAMAGE: " + damage + "\n");
     sb.append("---------------------------\n");
     return sb.toString();
-  }
-
-  protected static int getArmorAttributes(String attribute, Map<Slot, Item> equipment) {
-    int armorAttributes = 0;
-    for (Map.Entry<Slot, Item> set : equipment.entrySet()) {
-      if (set.getValue() != null && set.getValue() instanceof Armor) {
-        Armor a = (Armor) set.getValue();
-        HeroAttribute heroAttribute = (HeroAttribute) a.getHeroAttribute();
-        switch (attribute) {
-          case "strength":
-            armorAttributes += heroAttribute.getStrength();
-            break;
-          case "dexterity":
-            armorAttributes += heroAttribute.getDexterity();
-            break;
-          case "intelligence":
-            armorAttributes += heroAttribute.getIntelligence();
-            break;
-          default:
-            break;
-        }
-      }
-    }
-    return armorAttributes;
   }
 
   protected static int getWeaponDamage(Map<Slot, Item> equipment) {

@@ -60,9 +60,10 @@ public abstract class Hero {
   /**
    * Calculates the heros total attributes
    * 
-   * @return the heros total attributes
+   * @return the heros total attributes in form of a new instance
+   *         of a HeroAttribute
    */
-  abstract public int totalAttributes();
+  abstract public HeroAttribute totalAttributes();
 
   /**
    * Adds a weapon to the equipment of the hero

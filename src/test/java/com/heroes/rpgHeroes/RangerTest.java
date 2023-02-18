@@ -216,9 +216,9 @@ public class RangerTest {
     try {
       // Arrange
       test.equip(firstArmor);
-      int expected = 10;
+      HeroAttribute expected = new HeroAttribute(2, 7, 1);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -232,9 +232,9 @@ public class RangerTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(secondArmor);
-      int expected = 11;
+      HeroAttribute expected = new HeroAttribute(3, 7, 1);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -249,9 +249,9 @@ public class RangerTest {
       test.equip(firstArmor);
       test.equip(secondArmor);
       test.equip(thirdArmor);
-      int expected = 12;
+      HeroAttribute expected = new HeroAttribute(4, 7, 1);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -265,9 +265,9 @@ public class RangerTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(sameSlotAsFirstArmor);
-      int expected = 11;
+      HeroAttribute expected = new HeroAttribute(3, 7, 1);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {

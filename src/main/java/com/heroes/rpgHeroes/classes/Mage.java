@@ -35,8 +35,8 @@ public class Mage extends Hero {
   }
 
   @Override
-  public int totalAttributes() {
-    return Util.totalHeroAttributes(this.levelAttributes.getTotal(), super.equipment);
+  public HeroAttribute totalAttributes() {
+    return Util.totalHeroAttributes(this.levelAttributes, super.equipment);
   }
 
   @Override
@@ -47,9 +47,7 @@ public class Mage extends Hero {
 
   @Override
   public int damage() {
-    int damagingAttribute = this.levelAttributes.getDexterity()
-        + Util.getArmorAttributes("intelligence", super.equipment);
-    return Util.getWeaponDamage(super.equipment) * (1 + (damagingAttribute / 100));
+    return Util.getWeaponDamage(super.equipment) * (1 + (totalAttributes().getIntelligence() / 100));
   }
 
   @Override

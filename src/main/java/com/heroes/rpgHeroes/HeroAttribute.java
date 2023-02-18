@@ -45,6 +45,12 @@ public class HeroAttribute {
     this.intelligence += intelligence;
   }
 
+  public void increaseAttribute(HeroAttribute newAttribute) {
+    this.strength += newAttribute.getStrength();
+    this.dexterity += newAttribute.getDexterity();
+    this.intelligence += newAttribute.getIntelligence();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o)

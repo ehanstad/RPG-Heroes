@@ -42,14 +42,13 @@ public class Rogue extends Hero {
   }
 
   @Override
-  public int totalAttributes() {
-    return Util.totalHeroAttributes(this.levelAttributes.getTotal(), super.equipment);
+  public HeroAttribute totalAttributes() {
+    return Util.totalHeroAttributes(this.levelAttributes, super.equipment);
   }
 
   @Override
   public int damage() {
-    int damagingAttribute = this.levelAttributes.getDexterity() + Util.getArmorAttributes("dexterity", super.equipment);
-    return Util.getWeaponDamage(super.equipment) * (1 + (damagingAttribute / 100));
+    return Util.getWeaponDamage(super.equipment) * (1 + (totalAttributes().getDexterity() / 100));
   }
 
   @Override

@@ -216,9 +216,9 @@ public class RogueTest {
     try {
       // Arrange
       test.equip(firstArmor);
-      int expected = 12;
+      HeroAttribute expected = new HeroAttribute(3, 7, 2);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -232,9 +232,9 @@ public class RogueTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(secondArmor);
-      int expected = 15;
+      HeroAttribute expected = new HeroAttribute(4, 8, 3);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -249,9 +249,9 @@ public class RogueTest {
       test.equip(firstArmor);
       test.equip(secondArmor);
       test.equip(thirdArmor);
-      int expected = 18;
+      HeroAttribute expected = new HeroAttribute(5, 9, 4);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
@@ -265,9 +265,9 @@ public class RogueTest {
       // Arrange
       test.equip(firstArmor);
       test.equip(sameSlotAsFirstArmor);
-      int expected = 15;
+      HeroAttribute expected = new HeroAttribute(4, 8, 3);
       // Act
-      int actual = test.totalAttributes();
+      HeroAttribute actual = test.totalAttributes();
       // Assert
       assertEquals(expected, actual);
     } catch (Exception e) {
